@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 // WE IMPORT OUR COMPONENTS
@@ -10,7 +10,7 @@ function App() {
   const apiKey = "98e3fb1f";
 
   //State to hold movie data
-  const [movie, setMovie] = React.useState(null);
+  const [movie, setMovie] = useState(null);
 
   //Function to getMovies
   const getMovie = async (searchTerm) => {
@@ -23,6 +23,11 @@ function App() {
     //set the Movie state to the movie
     setMovie(data);
   };
+
+  //This will run on the first render but not on subsquent renders
+  useEffect(() => {
+    getMovie("Call Me By Your Name");
+  }, []);
 
   // USE OUR COMPONENTS IN APPs RETURNED JSX
   // We pass the getMovie function as a prop called moviesearch
